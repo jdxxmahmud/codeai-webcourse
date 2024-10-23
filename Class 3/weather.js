@@ -1,19 +1,19 @@
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("fetchWeatherButton").addEventListener("click", function() {
 
-        // OpenWeatherMap API URL for London's forecast
-        const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
-        const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=London&appid=${apiKey}&units=metric`;
+        
+        const apiKey = "API_KEY"; 
+        const apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=51.5074&lon=-0.1278&exclude=minutely,hourly,current&appid=${apiKey}&units=metric`;
 
         fetch(apiURL)
         .then(response => response.json())
         .then(data => {
-            // Get the forecast for tomorrow (this is 24 hours later, around the 8th index item in the forecast list)
-            const tomorrowForecast = data.list[8];
-            const temperature = tomorrowForecast.main.temp;
-            const description = tomorrowForecast.weather[0].description;
-            const humidity = tomorrowForecast.main.humidity;
-            const windSpeed = tomorrowForecast.wind.speed;
+            // Get the forecast for tomorrow (index 1 in daily array is tomorrow)
+            const tomorrowForecast = data.daily[1]; 
+            const temperature = tomorrowForecast.temp.day; 
+            const description = tomorrowForecast.weather[0].description; 
+            const humidity = tomorrowForecast.humidity;
+            const windSpeed = tomorrowForecast.wind_speed;
 
             // Display the weather details
             document.getElementById("weatherDetails").style.display = "block";
@@ -28,3 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+
+
+
+
